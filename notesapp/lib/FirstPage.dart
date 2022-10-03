@@ -9,7 +9,7 @@ class FirstPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Title'),
       ),
-      body: Container(),
+      body: Column(),
     );
   }
 }

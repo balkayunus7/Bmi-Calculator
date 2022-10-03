@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorsUtility {
   final mainHexColor = Colors.yellow[600];
-  final accentHexColor = Colors.black87;
+  final accentHexColor = Colors.white;
   final textFieldColor = Colors.white54;
 }
 

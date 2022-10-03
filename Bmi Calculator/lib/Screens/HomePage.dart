@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController weightController = TextEditingController();
 
   double _bmiResult = 0;
+  String textResult = '';
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +74,15 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               onPressed: () {
                 double _h = double.parse(heightController.text);
-                double _w = double.parse(heightController.text);
+                double _w = double.parse(weightController.text);
                 setState(() {
                   _bmiResult = _w / (_h * _h);
                   if (_bmiResult > 25) {
-                    Text("vdbhzhv");
+                    textResult = "You are over weight";
                   } else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
-                    Text("vdbvdvhzhv");
+                    textResult = "You are normal weight";
                   } else {
-                    Text("vdbaashzhv");
+                    textResult = "You are under weight";
                   }
                 });
               },
@@ -93,9 +94,27 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
             Container(
+              width: 150,
+              height: 70,
               alignment: Alignment.center,
-              color: Colors.red,
-              child: Text(_bmiResult.toString()),
+              child: Text(
+                _bmiResult.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    ?.copyWith(color: colors.mainHexColor),
+              ),
+            ),
+            const SizedBox(height: 25),
+            Container(
+              width: 370,
+              height: 50,
+              alignment: Alignment.center,
+              child: Text(
+                textResult,
+                style: Theme.of(context).textTheme.headline4?.copyWith(
+                    color: colors.accentHexColor, fontWeight: FontWeight.w400),
+              ),
             ),
           ],
         ),

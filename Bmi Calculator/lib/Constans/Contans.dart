@@ -10,6 +10,9 @@ class TextUtility {
   final headlinebarText = "Bmi Calculator";
   final hintText1 = "HEIGHT";
   final hintText2 = "WEIGHT";
+  final result1Text = "You are over weight";
+  final result2Text = "You have normak weight ";
+  final result3Text = "You are under  weight";
 }
 
 class SizeFonts {
@@ -19,5 +22,5 @@ class SizeFonts {
 class ContainerDimensions {
   final double containerWidth = 190;
   final double containerHeight = 175;
-  final double textfieldMaxLength = 8;
+  final int textfieldMaxLength = 8;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notesapp/Constans/Contans.dart';
+import 'package:notesapp/TextFields/Textfields.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +14,12 @@ class _HomePageState extends State<HomePage> {
   final texts = TextUtility();
   final fontSizes = SizeFonts();
   final contaDim = ContainerDimensions();
+
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+
+  double _bmiResult = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,37 +37,65 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                //SizedBox opened
                 SizedBox(
                   height: 190,
                   width: 175,
-                  child: _TextfieldContainer(
-                    colors: colors,
+                  //Textfields added
+                  child: TextfieldContainer(
+                    controller: heightController,
+                    colors: colors.textFieldColor,
                     text: texts.hintText1,
                     fontSize: fontSizes.hintTextSize,
-                    maxLength: contaDim.textfieldMaxLength,
                   ),
                 ),
+                //SizedBox opened
                 SizedBox(
                   height: 190,
                   width: 175,
-                  child: _TextfieldContainer(
-                    colors: colors,
+                  //Textfields added
+                  child: TextfieldContainer(
+                    controller: weightController,
+                    colors: colors.textFieldColor,
                     text: texts.hintText2,
                     fontSize: fontSizes.hintTextSize,
-                    maxLength: contaDim.textfieldMaxLength,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
+            //IconButtonAdded
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.heart_broken_outlined),
+              onPressed: () {
+                double _h = double.parse(heightController.text);
+                double _w = double.parse(heightController.text);
+                setState(() {
+                  _bmiResult = _w / (_h * _h);
+                  if (_bmiResult > 25) {
+                    Text("vdbhzhv");
+                  } else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
+                    Text("vdbvdvhzhv");
+                  } else {
+                    Text("vdbaashzhv");
+                  }
+                });
+              },
+              iconSize: 65,
+              color: colors.mainHexColor,
+              icon: const Icon(
+                Icons.heart_broken_outlined,
+              ),
+            ),
+            const SizedBox(height: 30),
+            Container(
+              alignment: Alignment.center,
+              color: Colors.red,
+              child: Text(_bmiResult.toString()),
             ),
           ],
         ),
@@ -68,40 +103,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-class _TextfieldContainer extends StatelessWidget {
-  const _TextfieldContainer({
-    Key? key,
-    required this.colors,
-    required this.text,
-    required this.fontSize,
-    required this.maxLength,
-  }) : super(key: key);
-
-  final ColorsUtility colors;
-  final String text;
-  final double fontSize;
-  final double maxLength;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        maxLength: 8,
-        keyboardType: TextInputType.number,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: FontWeight.w400,
-          color: colors.textFieldColor,
-        ),
-        decoration: InputDecoration(
-            hintText: text,
-            hintStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.w400,
-                color: Colors.white60)),
-      ),
-    );
-  }
-}
-

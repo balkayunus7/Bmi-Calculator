@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notesapp/FirstPage.dart';
+import 'package:notesapp/Screens/HomePage.dart';
+import 'package:notesapp/Shapes/RightBar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const FirstPage();
+    return RightBar(
+      barWidth: 20,
+    );
   }
 }
